@@ -7,7 +7,6 @@ import java.net.Socket;
 
 import br.ufc.Equipamento;
 import br.ufc.Radio;
-import br.ufc.Tv;
 
 public class TrataClienteRadio implements Runnable{
 
@@ -23,7 +22,6 @@ public class TrataClienteRadio implements Runnable{
 	public TrataClienteRadio(Socket cliente, Servidor servidor, Equipamento equipamento) {
 		this.cliente = cliente;
 		this.servidor = servidor;
-		//		this.objetoAtualizado = tipoObjeto;
 		this.equipamento = equipamento;
 	}
 
@@ -47,7 +45,6 @@ public class TrataClienteRadio implements Runnable{
 				e.printStackTrace();
 				terminar = true;
 			}
-
 		}
 
 		try {
@@ -60,7 +57,6 @@ public class TrataClienteRadio implements Runnable{
 	boolean statusRadio = false;
 
 	public void enviarMensagemClienteTv(Object objEnviar) {
-
 		// envia msg para todo mundo
 		//Mandar um objeto com o tipo Arcondicionado
 		ObjectOutputStream oos2;

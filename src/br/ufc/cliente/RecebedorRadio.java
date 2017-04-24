@@ -4,7 +4,6 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 
 import br.ufc.Radio;
-import br.ufc.Tv;
 
 public class RecebedorRadio implements Runnable{
 

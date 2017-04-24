@@ -1,13 +1,10 @@
 package br.ufc.servidor;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.Scanner;
 
-import br.ufc.Arcondicionado;
 import br.ufc.Equipamento;
 import br.ufc.Lampada;
 
@@ -25,25 +22,12 @@ public class TrataClienteLampada implements Runnable{
 	public TrataClienteLampada(Socket cliente, Servidor servidor, Equipamento equipamento) {
 		this.cliente = cliente;
 		this.servidor = servidor;
-		//		this.objetoAtualizado = tipoObjeto;
 		this.equipamento = equipamento;
 	}
 
 	public void run() {
 
-		// quando chegar uma msg, distribui pra todos
-		//
-		//		Scanner s = new Scanner(this.cliente);
-		//
-		//		while (s.hasNextLine()) {
-		//
-		//			servidor.distribuiMensagem(s.nextLine());
-		//
-		//		}
-
 		ObjectInputStream ois = null;
-
-
 
 		while (!terminar ) {
 			//Receber o tipo do equipamento que abriu a comunicação 
@@ -61,7 +45,6 @@ public class TrataClienteLampada implements Runnable{
 				e.printStackTrace();
 				terminar = true;
 			}
-
 		}
 
 		try {
@@ -73,8 +56,8 @@ public class TrataClienteLampada implements Runnable{
 	}
 
 	boolean statusLampada = false;
-	public void enviarMensagemClienteLampada(Object objEnviar) {
 
+	public void enviarMensagemClienteLampada(Object objEnviar) {
 		// envia msg para todo mundo
 		//Mandar um objeto com o tipo Arcondicionado
 		ObjectOutputStream oos2;
@@ -91,8 +74,5 @@ public class TrataClienteLampada implements Runnable{
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-
 	}
-
-
 }

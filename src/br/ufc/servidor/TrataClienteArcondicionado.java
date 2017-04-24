@@ -1,11 +1,9 @@
 package br.ufc.servidor;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.Scanner;
 
 import br.ufc.Arcondicionado;
 import br.ufc.Equipamento;
@@ -20,11 +18,11 @@ public class TrataClienteArcondicionado implements Runnable{
 	private Object objetoAtualizado;
 	private Equipamento equipamento;
 	private boolean terminar = false;
-	
+
 	public TrataClienteArcondicionado(Socket cliente, Servidor servidor, Equipamento equipamento) {
 		this.cliente = cliente;
 		this.servidor = servidor;
-//		this.objetoAtualizado = tipoObjeto;
+		//		this.objetoAtualizado = tipoObjeto;
 		this.equipamento = equipamento;
 	}
 
@@ -41,18 +39,18 @@ public class TrataClienteArcondicionado implements Runnable{
 		//		}
 
 		ObjectInputStream ois = null;
-		
-		
+
+
 
 		while (!terminar) {
 			//Receber o tipo do equipamento que abriu a comunicação 
 			try {
 				ois = new ObjectInputStream(cliente.getInputStream());
 				objetoAtualizado =  ois.readObject();
-				
+
 				System.out.println("Temperatura recebida do cliente :" + ((Arcondicionado)objetoAtualizado).getTemperaturaProgramada());				
 				enviarMensagemClienteArcondicionado(objetoAtualizado);
-				
+
 			} catch (IOException e) {
 				e.printStackTrace();
 				terminar = true;
@@ -60,8 +58,8 @@ public class TrataClienteArcondicionado implements Runnable{
 				e.printStackTrace();
 				terminar = true;
 			}
-			
-			
+
+
 		}
 
 		try {
@@ -71,7 +69,7 @@ public class TrataClienteArcondicionado implements Runnable{
 		}
 
 	}
-	
+
 
 	int temp = 18;
 

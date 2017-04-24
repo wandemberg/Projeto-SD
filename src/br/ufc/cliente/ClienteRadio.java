@@ -6,7 +6,6 @@ import java.net.UnknownHostException;
 
 import br.ufc.Equipamento;
 import br.ufc.Radio;
-import br.ufc.Tv;
 
 public class ClienteRadio {
 

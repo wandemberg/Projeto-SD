@@ -2,11 +2,8 @@ package br.ufc.cliente;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
-import java.util.Scanner;
 
-import br.ufc.Arcondicionado;
 import br.ufc.Cortina;
-import br.ufc.Lampada;
 
 public class RecebedorCortina implements Runnable{
 

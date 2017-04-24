@@ -1,9 +1,7 @@
 package br.ufc.cliente;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.net.Socket;
-import java.util.Scanner;
 
 import br.ufc.Arcondicionado;
 
@@ -26,7 +24,7 @@ public class RecebedorArcondicionado implements Runnable{
 
 	public void run() {
 
-		
+
 		ObjectInputStream ois = null;
 
 		// recebe msgs do servidor e imprime na tela
@@ -38,31 +36,31 @@ public class RecebedorArcondicionado implements Runnable{
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
+
 			try {
 				objetoAtualizado =  ois.readObject();
-//				ois.close();
+				//				ois.close();
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
+
 			int tempProgramada = ((Arcondicionado)objetoAtualizado).getTemperaturaProgramada();
-			
+
 			cliente.getArcondicionado().setTemperaturaProgramada(tempProgramada);
-			
+
 			System.out.println("Temperatura recebida do Servidor e atualizada:" + tempProgramada);
-			
+
 		}
-		
-//		Scanner s = new Scanner(this.servidor);
-//
-//		while (s.hasNextLine()) {
-//
-//			System.out.println(s.nextLine());
-//
-//		}
+
+		//		Scanner s = new Scanner(this.servidor);
+		//
+		//		while (s.hasNextLine()) {
+		//
+		//			System.out.println(s.nextLine());
+		//
+		//		}
 
 	}
 

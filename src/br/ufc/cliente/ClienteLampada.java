@@ -1,12 +1,9 @@
 package br.ufc.cliente;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.io.PrintStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.Scanner;
 
-import br.ufc.Arcondicionado;
 import br.ufc.Equipamento;
 import br.ufc.Lampada;
 

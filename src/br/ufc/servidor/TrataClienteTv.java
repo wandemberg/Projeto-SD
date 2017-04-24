@@ -46,7 +46,6 @@ public class TrataClienteTv implements Runnable{
 				e.printStackTrace();
 				terminar = true;
 			}
-
 		}
 
 		try {
@@ -59,7 +58,6 @@ public class TrataClienteTv implements Runnable{
 	boolean statusTv = false;
 
 	public void enviarMensagemClienteTv(Object objEnviar) {
-
 		// envia msg para todo mundo
 		//Mandar um objeto com o tipo Arcondicionado
 		ObjectOutputStream oos2;
