@@ -10,6 +10,7 @@ public class Arcondicionado implements Serializable{
 	private int temperaturaProgramada = 20;
 	private boolean ligar = false;
 	
+	
 	public int getTemperaturaMaxima() {
 		return temperaturaMaxima;
 	}
