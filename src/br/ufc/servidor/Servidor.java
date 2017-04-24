@@ -60,7 +60,11 @@ public class Servidor {
 					TrataClienteLampada tc = new TrataClienteLampada(cliente, this, obj);
 					// cria tratador de cliente numa nova thread
 					new Thread(tc).start();
-				}				
+				} else if (obj.getIndiceTipoSelecionado() == 2){
+					TrataClienteCortina tc = new TrataClienteCortina(cliente, this, obj);
+					// cria tratador de cliente numa nova thread
+					new Thread(tc).start();
+				}						
 
 				// adiciona saida do cliente à lista
 				this.clientes.add(cliente);
