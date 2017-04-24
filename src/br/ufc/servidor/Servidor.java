@@ -68,7 +68,11 @@ public class Servidor {
 					TrataClienteTv tc = new TrataClienteTv(cliente, this, obj);
 					// cria tratador de cliente numa nova thread
 					new Thread(tc).start();
-				}								
+				} else if (obj.getIndiceTipoSelecionado() == 4){
+					TrataClienteRadio tc = new TrataClienteRadio(cliente, this, obj);
+					// cria tratador de cliente numa nova thread
+					new Thread(tc).start();
+				}										
 
 				// adiciona saida do cliente à lista
 				this.clientes.add(cliente);
