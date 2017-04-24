@@ -8,8 +8,9 @@ import java.util.Scanner;
 
 import br.ufc.Arcondicionado;
 import br.ufc.Equipamento;
+import br.ufc.Lampada;
 
-public class TrataCliente implements Runnable{
+public class TrataClienteLampada implements Runnable{
 
 	//Stream para receber dados de um cliente
 	private Socket cliente;
@@ -19,7 +20,7 @@ public class TrataCliente implements Runnable{
 	private Object objetoAtualizado;
 	private Equipamento equipamento;
 
-	public TrataCliente(Socket cliente, Servidor servidor, Equipamento equipamento) {
+	public TrataClienteLampada(Socket cliente, Servidor servidor, Equipamento equipamento) {
 		this.cliente = cliente;
 		this.servidor = servidor;
 //		this.objetoAtualizado = tipoObjeto;
@@ -58,9 +59,10 @@ public class TrataCliente implements Runnable{
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			System.out.println("Temperatura recebida do cliente :" + ((Arcondicionado)objetoAtualizado).getTemperaturaProgramada());
+			System.out.println("Informacao recebida do cliente Lampada se a lampada esta ligada:" + ((Lampada)objetoAtualizado).isLigar());
 			
-			servidor.enviarMensagemCliente(0, objetoAtualizado);
+			//Tratar esse indice esta preso ao numero do cliente
+			servidor.enviarMensagemClienteLampada(0, objetoAtualizado);
 		}
 
 
