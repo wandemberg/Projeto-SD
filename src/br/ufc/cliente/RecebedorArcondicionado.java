@@ -6,16 +6,16 @@ import java.util.Scanner;
 
 import br.ufc.Arcondicionado;
 
-public class Recebedor implements Runnable{
+public class RecebedorArcondicionado implements Runnable{
 
 
 	private InputStream servidor;
 	private boolean terminar = false;
-	private Cliente cliente;
+	private ClienteArcondicionado cliente;
 	//Objeto que está no cliente atualizado
 	private Object objetoAtualizado;
 
-	public Recebedor(InputStream servidor, Cliente cliente) {
+	public RecebedorArcondicionado(InputStream servidor, ClienteArcondicionado cliente) {
 
 		this.servidor = servidor;
 		this.cliente = cliente;

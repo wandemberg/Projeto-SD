@@ -9,7 +9,7 @@ import java.util.Scanner;
 import br.ufc.Arcondicionado;
 import br.ufc.Equipamento;
 
-public class Cliente {
+public class ClienteArcondicionado {
 
 	private String host;
 	private int porta;
@@ -18,7 +18,7 @@ public class Cliente {
 	private Equipamento equipamento;
 	private Arcondicionado arcondicionado;
 
-	public Cliente (String host, int porta) {
+	public ClienteArcondicionado (String host, int porta) {
 
 		this.host = host;
 		this.porta = porta;
@@ -36,7 +36,7 @@ public class Cliente {
 
 		// thread para receber mensagens do servidor
 
-		Recebedor r = new Recebedor(cliente.getInputStream(), this);
+		RecebedorArcondicionado r = new RecebedorArcondicionado(cliente.getInputStream(), this);
 		new Thread(r).start();
 
 
@@ -99,7 +99,7 @@ public class Cliente {
 
 		// dispara cliente
 
-		new Cliente("127.0.0.1", 12345).executa();
+		new ClienteArcondicionado("127.0.0.1", 12345).executa();
 
 	}
 
