@@ -50,7 +50,7 @@ public class Servidor {
 
 			try {
 				obj = (Equipamento) ois.readObject();
-				System.out.println("Tipo do equipamento é " + obj.getTipo());
+				System.out.println("Tipo do equipamento " + obj.getTipo());
 				//Selecionar o tipo de objeto a ser tratado
 				if (obj.getIndiceTipoSelecionado() == 0) {
 					TrataClienteArcondicionado tc = new TrataClienteArcondicionado(cliente, this, obj);
@@ -64,7 +64,11 @@ public class Servidor {
 					TrataClienteCortina tc = new TrataClienteCortina(cliente, this, obj);
 					// cria tratador de cliente numa nova thread
 					new Thread(tc).start();
-				}						
+				} else if (obj.getIndiceTipoSelecionado() == 3){
+					TrataClienteTv tc = new TrataClienteTv(cliente, this, obj);
+					// cria tratador de cliente numa nova thread
+					new Thread(tc).start();
+				}								
 
 				// adiciona saida do cliente à lista
 				this.clientes.add(cliente);

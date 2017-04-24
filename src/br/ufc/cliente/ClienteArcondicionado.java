@@ -1,10 +1,8 @@
 package br.ufc.cliente;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.io.PrintStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.Scanner;
 
 import br.ufc.Arcondicionado;
 import br.ufc.Equipamento;
@@ -19,14 +17,10 @@ public class ClienteArcondicionado {
 	private Arcondicionado arcondicionado;
 
 	public ClienteArcondicionado (String host, int porta) {
-
 		this.host = host;
 		this.porta = porta;
 		arcondicionado = new Arcondicionado();
-
 	}
-
-
 
 	public void executa() throws UnknownHostException, IOException {
 
@@ -103,30 +97,20 @@ public class ClienteArcondicionado {
 
 	}
 
-
-
 	public Equipamento getEquipamento() {
 		return equipamento;
 	}
-
-
 
 	public void setEquipamento(Equipamento equipamento) {
 		this.equipamento = equipamento;
 	}
 
-
-
 	public Arcondicionado getArcondicionado() {
 		return arcondicionado;
 	}
 
-
-
 	public void setArcondicionado(Arcondicionado arcondicionado) {
 		this.arcondicionado = arcondicionado;
 	}
-
-
 
 }
