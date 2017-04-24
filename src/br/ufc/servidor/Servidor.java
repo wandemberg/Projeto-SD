@@ -19,6 +19,8 @@ public class Servidor {
 
 	private List<Socket> clientes;
 
+	private boolean terminar = false;
+
 
 	public Servidor (int porta) {
 
@@ -33,7 +35,7 @@ public class Servidor {
 
 		System.out.println("Porta 12345 aberta!");
 
-		while (true) {
+		while (!terminar ) {
 
 			// aceita um cliente
 
@@ -73,52 +75,6 @@ public class Servidor {
 		}
 	}
 
-
-	int temp = 18;
-
-	public void enviarMensagemClienteArcondicionado(int indiceCliente, Object objEnviar) {
-
-		// envia msg para todo mundo
-		//Mandar um objeto com o tipo Arcondicionado
-		ObjectOutputStream oos2;
-		try {
-			oos2 = new ObjectOutputStream(clientes.get(indiceCliente).getOutputStream());
-
-			Arcondicionado arcondicionado = new Arcondicionado();
-			arcondicionado.setTemperaturaProgramada(temp);
-			oos2.writeObject(arcondicionado);
-
-			temp++;
-			if(temp >= arcondicionado.getTemperaturaMaxima())
-				temp = arcondicionado.getTemperaturaMinima();
-
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-
-	}
-
-	boolean statusLampada = false;
-	public void enviarMensagemClienteLampada(int indiceCliente, Object objEnviar) {
-
-		// envia msg para todo mundo
-		//Mandar um objeto com o tipo Arcondicionado
-		ObjectOutputStream oos2;
-		try {
-			oos2 = new ObjectOutputStream(clientes.get(indiceCliente).getOutputStream());
-
-			statusLampada = !statusLampada;
-			Lampada lamp = new Lampada();
-			lamp.setLigar(statusLampada);
-			
-			oos2.writeObject(lamp);
-
-
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-
-	}
 
 	public static void main(String[] args) throws IOException {
 

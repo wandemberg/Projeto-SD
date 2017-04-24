@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Arcondicionado implements Serializable{
 	private static final long serialVersionUID = 1L;
 
-	private int temperaturaMaxima = 27;
+	private int temperaturaMaxima = 22;
 	private int temperaturaMinima = 16;
 	private int temperaturaProgramada = 20;
 	private boolean ligar = false;

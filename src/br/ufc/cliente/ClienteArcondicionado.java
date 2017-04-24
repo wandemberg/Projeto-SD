@@ -36,7 +36,7 @@ public class ClienteArcondicionado {
 
 		// thread para receber mensagens do servidor
 
-		RecebedorArcondicionado r = new RecebedorArcondicionado(cliente.getInputStream(), this);
+		RecebedorArcondicionado r = new RecebedorArcondicionado(cliente, this);
 		new Thread(r).start();
 
 

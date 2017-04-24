@@ -3,6 +3,7 @@ package br.ufc.servidor;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Scanner;
 
@@ -19,11 +20,12 @@ public class TrataClienteLampada implements Runnable{
 	//Objeto que está no cliente atualizado
 	private Object objetoAtualizado;
 	private Equipamento equipamento;
+	private boolean terminar = false;
 
 	public TrataClienteLampada(Socket cliente, Servidor servidor, Equipamento equipamento) {
 		this.cliente = cliente;
 		this.servidor = servidor;
-//		this.objetoAtualizado = tipoObjeto;
+		//		this.objetoAtualizado = tipoObjeto;
 		this.equipamento = equipamento;
 	}
 
@@ -40,35 +42,57 @@ public class TrataClienteLampada implements Runnable{
 		//		}
 
 		ObjectInputStream ois = null;
-		
 
 
-		while (true) {
+
+		while (!terminar ) {
 			//Receber o tipo do equipamento que abriu a comunicação 
 			try {
 				ois = new ObjectInputStream(cliente.getInputStream());
+				objetoAtualizado =  ois.readObject();
+
+				System.out.println("Informacao recebida do cliente Lampada se a lampada esta ligada:" + ((Lampada)objetoAtualizado).isLigar());			
+				//Tratar esse indice esta preso ao numero do cliente
+				enviarMensagemClienteLampada(objetoAtualizado);
 			} catch (IOException e) {
 				e.printStackTrace();
-			}
-			
-			try {
-				objetoAtualizado =  ois.readObject();
-//				ois.close();
+				terminar = true;
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
+				terminar = true;
 			}
-			System.out.println("Informacao recebida do cliente Lampada se a lampada esta ligada:" + ((Lampada)objetoAtualizado).isLigar());
-			
-			//Tratar esse indice esta preso ao numero do cliente
-			servidor.enviarMensagemClienteLampada(0, objetoAtualizado);
+
 		}
 
-
-
-		//		s.close();
+		try {
+			cliente.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 	}
+
+	boolean statusLampada = false;
+	public void enviarMensagemClienteLampada(Object objEnviar) {
+
+		// envia msg para todo mundo
+		//Mandar um objeto com o tipo Arcondicionado
+		ObjectOutputStream oos2;
+		try {
+			oos2 = new ObjectOutputStream(cliente.getOutputStream());
+
+			statusLampada = !statusLampada;
+			Lampada lamp = new Lampada();
+			lamp.setLigar(statusLampada);
+
+			oos2.writeObject(lamp);
+
+
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+
+	}
+
 
 }
