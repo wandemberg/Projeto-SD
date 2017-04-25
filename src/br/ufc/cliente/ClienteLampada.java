@@ -46,8 +46,10 @@ public class ClienteLampada {
 
 			//Mandar o status do objeto inteligente atual
 			ObjectOutputStream oos2 = new ObjectOutputStream(cliente.getOutputStream());
+
 			//Ficar variando o resultado para o cliente
-			lampada.setLigar(!lampada.isLigar());
+			//			lampada.setLigar(!lampada.isLigar());
+
 			oos2.writeObject(lampada);
 
 			try {

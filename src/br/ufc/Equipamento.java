@@ -9,7 +9,7 @@ public class Equipamento implements Serializable {
 	//Nome do objeto
 	private String nome = "Ar 1";
 	//Nome da classe que define o objeto
-	private String tipos []= {"Arcondicionado", "Lampada", "Cortina", "TV", "Radio"};
+	private String tipos []= {"Arcondicionado", "Lampada", "Cortina", "TV", "Radio", "Controlador"};
 	//Indice do tipo selecionado
 	private int indiceTipoSelecionado = 0;
 	

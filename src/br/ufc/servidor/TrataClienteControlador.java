@@ -8,7 +8,7 @@ import java.net.Socket;
 import br.ufc.Arcondicionado;
 import br.ufc.Equipamento;
 
-public class TrataClienteArcondicionado implements Runnable{
+public class TrataClienteControlador implements Runnable{
 
 	//Stream para receber dados de um cliente
 	private Socket cliente;
@@ -19,7 +19,7 @@ public class TrataClienteArcondicionado implements Runnable{
 	private Equipamento equipamento;
 	private boolean terminar = false;
 
-	public TrataClienteArcondicionado(Socket cliente, Servidor servidor, Equipamento equipamento) {
+	public TrataClienteControlador(Socket cliente, Servidor servidor, Equipamento equipamento) {
 		this.cliente = cliente;
 		this.servidor = servidor;
 		//		this.objetoAtualizado = tipoObjeto;
@@ -28,19 +28,7 @@ public class TrataClienteArcondicionado implements Runnable{
 
 	public void run() {
 
-		// quando chegar uma msg, distribui pra todos
-		//
-		//		Scanner s = new Scanner(this.cliente);
-		//
-		//		while (s.hasNextLine()) {
-		//
-		//			servidor.distribuiMensagem(s.nextLine());
-		//
-		//		}
-
 		ObjectInputStream ois = null;
-
-
 
 		while (!terminar) {
 			//Receber o tipo do equipamento que abriu a comunicação 
@@ -49,7 +37,7 @@ public class TrataClienteArcondicionado implements Runnable{
 				objetoAtualizado =  (Arcondicionado)ois.readObject();
 
 				System.out.println("Temperatura recebida do cliente :" + objetoAtualizado.getTemperaturaProgramada());				
-//				enviarMensagemClienteArcondicionado(objetoAtualizado);
+				//				enviarMensagemClienteArcondicionado(objetoAtualizado);
 
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -58,8 +46,6 @@ public class TrataClienteArcondicionado implements Runnable{
 				e.printStackTrace();
 				terminar = true;
 			}
-
-
 		}
 
 		try {
@@ -94,7 +80,7 @@ public class TrataClienteArcondicionado implements Runnable{
 		}
 
 	}
-	
+
 	public void enviarArcondicionado(Arcondicionado objEnviar) {
 
 		// envia msg para todo mundo
