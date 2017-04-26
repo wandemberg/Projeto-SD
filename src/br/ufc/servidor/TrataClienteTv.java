@@ -5,7 +5,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
+import br.ufc.MensagemControlador;
 import br.ufc.MensagemEquipamento;
+import br.ufc.Radio;
 import br.ufc.Tv;
 
 public class TrataClienteTv implements TrataCliente, Runnable{
@@ -37,8 +39,15 @@ public class TrataClienteTv implements TrataCliente, Runnable{
 				objetoAtualizado =  ois.readObject();
 
 				System.out.println("Informacao recebida do cliente TV se a TV esta ligada:" + ((Tv)objetoAtualizado).isLigar());			
-				//Tratar esse indice esta preso ao numero do cliente
-				enviarMensagemClienteTv(objetoAtualizado);
+				//				//Tratar esse indice esta preso ao numero do cliente
+				//				enviarMensagemClienteTv(objetoAtualizado);
+
+				MensagemControlador msgControlador = new MensagemControlador();
+				msgControlador.setEnviar(false);
+				msgControlador.setObj((Tv)objetoAtualizado);
+				msgControlador.setTipoObjeto("Tv");
+				servidor.enviarMensagemControlador(msgControlador);
+
 			} catch (IOException e) {
 				e.printStackTrace();
 				terminar = true;
@@ -55,7 +64,7 @@ public class TrataClienteTv implements TrataCliente, Runnable{
 		}
 	}
 
-	boolean statusTv = false;
+	//	boolean statusTv = false;
 
 	public void enviarMensagemClienteTv(Object objEnviar) {
 		// envia msg para todo mundo
@@ -64,11 +73,12 @@ public class TrataClienteTv implements TrataCliente, Runnable{
 		try {
 			oos2 = new ObjectOutputStream(cliente.getOutputStream());
 
-			statusTv = !statusTv;
-			Tv tv = new Tv();
-			tv.setLigar(statusTv);
+			//			statusTv = !statusTv;
 
-			oos2.writeObject(tv);
+			//			Tv tv = new Tv();
+			//			tv.setLigar(statusTv);
+
+			oos2.writeObject(objEnviar);
 
 		} catch (IOException e1) {
 			e1.printStackTrace();

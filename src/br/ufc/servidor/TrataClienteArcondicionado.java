@@ -6,6 +6,8 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import br.ufc.Arcondicionado;
+import br.ufc.Lampada;
+import br.ufc.MensagemControlador;
 import br.ufc.MensagemEquipamento;
 
 public class TrataClienteArcondicionado implements TrataCliente, Runnable{
@@ -51,6 +53,12 @@ public class TrataClienteArcondicionado implements TrataCliente, Runnable{
 				System.out.println("Temperatura recebida do cliente :" + objetoAtualizado.getTemperaturaProgramada());				
 //				enviarMensagemClienteArcondicionado(objetoAtualizado);
 
+				MensagemControlador msgControlador = new MensagemControlador();
+				msgControlador.setEnviar(false);
+				msgControlador.setObj((Arcondicionado)objetoAtualizado);
+				msgControlador.setTipoObjeto("Arcondicionado");
+				servidor.enviarMensagemControlador(msgControlador);
+
 			} catch (IOException e) {
 				e.printStackTrace();
 				terminar = true;
@@ -71,7 +79,7 @@ public class TrataClienteArcondicionado implements TrataCliente, Runnable{
 	}
 
 
-	int temp = 18;
+//	int temp = 18;
 
 	public void enviarMensagemClienteArcondicionado(Object objEnviar) {
 
@@ -81,13 +89,14 @@ public class TrataClienteArcondicionado implements TrataCliente, Runnable{
 		try {
 			oos2 = new ObjectOutputStream(cliente.getOutputStream());
 
-			Arcondicionado arcondicionado = new Arcondicionado();
-			arcondicionado.setTemperaturaProgramada(temp);
-			oos2.writeObject(arcondicionado);
+//			Arcondicionado arcondicionado = new Arcondicionado();
+//			arcondicionado.setTemperaturaProgramada(temp);
+			
+			oos2.writeObject(objEnviar);
 
-			temp++;
-			if(temp >= arcondicionado.getTemperaturaMaxima())
-				temp = arcondicionado.getTemperaturaMinima();
+//			temp++;
+//			if(temp >= arcondicionado.getTemperaturaMaxima())
+//				temp = arcondicionado.getTemperaturaMinima();
 
 		} catch (IOException e1) {
 			e1.printStackTrace();

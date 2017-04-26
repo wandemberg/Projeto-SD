@@ -5,6 +5,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
+import br.ufc.Arcondicionado;
+import br.ufc.MensagemControlador;
 import br.ufc.MensagemEquipamento;
 import br.ufc.Radio;
 
@@ -36,8 +38,15 @@ public class TrataClienteRadio implements TrataCliente, Runnable{
 				objetoAtualizado =  ois.readObject();
 
 				System.out.println("Informacao recebida do cliente Radio se a Radio esta ligada:" + ((Radio)objetoAtualizado).isLigar());			
-				//Tratar esse indice esta preso ao numero do cliente
-				enviarMensagemClienteRadio(objetoAtualizado);
+				//				//Tratar esse indice esta preso ao numero do cliente
+				//				enviarMensagemClienteRadio(objetoAtualizado);
+
+				MensagemControlador msgControlador = new MensagemControlador();
+				msgControlador.setEnviar(false);
+				msgControlador.setObj((Radio)objetoAtualizado);
+				msgControlador.setTipoObjeto("Radio");
+				servidor.enviarMensagemControlador(msgControlador);
+
 			} catch (IOException e) {
 				e.printStackTrace();
 				terminar = true;
@@ -54,7 +63,7 @@ public class TrataClienteRadio implements TrataCliente, Runnable{
 		}
 	}
 
-	boolean statusRadio = false;
+	//	boolean statusRadio = false;
 
 	public void enviarMensagemClienteRadio(Object objEnviar) {
 		// envia msg para todo mundo
@@ -63,11 +72,12 @@ public class TrataClienteRadio implements TrataCliente, Runnable{
 		try {
 			oos2 = new ObjectOutputStream(cliente.getOutputStream());
 
-			statusRadio = !statusRadio;
-			Radio radio = new Radio();
-			radio.setLigar(statusRadio);
+			//			statusRadio = !statusRadio;
 
-			oos2.writeObject(radio);
+			//			Radio radio = new Radio();
+			//			radio.setLigar(statusRadio);
+
+			oos2.writeObject(objEnviar);
 
 		} catch (IOException e1) {
 			e1.printStackTrace();

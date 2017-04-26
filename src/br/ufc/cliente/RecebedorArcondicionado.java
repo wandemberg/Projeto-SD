@@ -15,12 +15,9 @@ public class RecebedorArcondicionado implements Runnable{
 	private Object objetoAtualizado;
 
 	public RecebedorArcondicionado(Socket servidor, ClienteArcondicionado cliente) {
-
 		this.servidor = servidor;
 		this.cliente = cliente;
 	}
-
-
 
 	public void run() {
 
@@ -53,14 +50,6 @@ public class RecebedorArcondicionado implements Runnable{
 			System.out.println("Temperatura recebida do Servidor e atualizada:" + tempProgramada);
 
 		}
-
-		//		Scanner s = new Scanner(this.servidor);
-		//
-		//		while (s.hasNextLine()) {
-		//
-		//			System.out.println(s.nextLine());
-		//
-		//		}
 
 	}
 

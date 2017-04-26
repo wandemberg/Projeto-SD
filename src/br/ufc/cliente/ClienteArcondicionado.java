@@ -33,7 +33,6 @@ public class ClienteArcondicionado {
 		RecebedorArcondicionado r = new RecebedorArcondicionado(cliente, this);
 		new Thread(r).start();
 
-
 		//Mandar um objeto com o tipo do objeto
 		ObjectOutputStream oos = new ObjectOutputStream(cliente.getOutputStream());
 		equipamento = new MensagemEquipamento();
@@ -41,30 +40,11 @@ public class ClienteArcondicionado {
 
 		System.out.println("Enviou o tipo de objeto");
 		
-		// lê msgs do teclado e manda pro servidor
-
-		//		Scanner teclado = new Scanner(System.in);
-		//
-		//		PrintStream saida = new PrintStream(cliente.getOutputStream());
-
-		//		while (teclado.hasNextLine()) {
-		//
-		//			saida.println(teclado.nextLine());
-		//
-		//		}
-
-
-//		int temp = 20;
-
 		while (!terminar) {
 
 			//Mandar um objeto com o tipo Arcondicionado
 			ObjectOutputStream oos2 = new ObjectOutputStream(cliente.getOutputStream());
-//			arcondicionado = new Arcondicionado();
-//			arcondicionado.setTemperaturaProgramada(temp);
 			oos2.writeObject(arcondicionado);
-			//Aumentar, ou seja, variar a temperatura
-//			temp++;
 
 			try {
 				Thread.sleep(5500);
@@ -73,15 +53,7 @@ public class ClienteArcondicionado {
 			}
 
 			System.out.println("Envou ao servidor um objeto Arcondicionado");
-//			if(temp >= 30)
-//				temp = arcondicionado.getTemperaturaMinima();
 		}
-
-
-
-		//		saida.close();
-		//
-		//		teclado.close();
 
 		cliente.close();    
 

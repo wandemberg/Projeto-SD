@@ -46,8 +46,11 @@ public class ClienteRadio {
 
 			//Mandar o status do objeto inteligente atual
 			ObjectOutputStream oos2 = new ObjectOutputStream(cliente.getOutputStream());
-			//Ficar variando o resultado para o cliente
-			radio.setLigar(!radio.isLigar());
+
+			//			//Ficar variando o resultado para o cliente
+			//			radio.setLigar(!radio.isLigar());
+
+			//Envia ao servidor o valor atual do servidor
 			oos2.writeObject(radio);
 
 			try {
@@ -59,11 +62,6 @@ public class ClienteRadio {
 			System.out.println("Enviou ao servidor o status atual do objeto " + equipamento.getTipo() 
 			+ " com valor: " + radio.isLigar());
 		}
-
-
-		//		saida.close();
-		//
-		//		teclado.close();
 
 		cliente.close();    
 

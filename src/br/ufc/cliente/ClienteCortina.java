@@ -46,8 +46,11 @@ public class ClienteCortina {
 
 			//Mandar o status do objeto inteligente atual
 			ObjectOutputStream oos2 = new ObjectOutputStream(cliente.getOutputStream());
+
 			//Ficar variando o resultado para o cliente
-			cortina.setLevantar(!cortina.isLevantar());
+			//			cortina.setLevantar(!cortina.isLevantar());
+
+			//Envia o valor atual da cortina
 			oos2.writeObject(cortina);
 
 			try {
@@ -59,11 +62,6 @@ public class ClienteCortina {
 			System.out.println("Enviou ao servidor o status atual do objeto " + equipamento.getTipo() 
 			+ " com valor: " + cortina.isLevantar());
 		}
-
-
-		//		saida.close();
-		//
-		//		teclado.close();
 
 		cliente.close();    
 

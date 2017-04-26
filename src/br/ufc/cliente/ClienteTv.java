@@ -46,34 +46,30 @@ public class ClienteTv {
 
 			//Mandar o status do objeto inteligente atual
 			ObjectOutputStream oos2 = new ObjectOutputStream(cliente.getOutputStream());
-			//Ficar variando o resultado para o cliente
-			tv.setLigar(!tv.isLigar());
-			oos2.writeObject(tv);
 
+			//			//Ficar variando o resultado para o cliente
+			//			tv.setLigar(!tv.isLigar());
+
+			//Envia o objeto atual
+			oos2.writeObject(tv);
+			
+			System.out.println("Enviou ao servidor o status atual do objeto " + equipamento.getTipo() 
+			+ " com valor: " + tv.isLigar());
+			
 			try {
 				Thread.sleep(tempoTransmissaoEstadoSensor);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
-			}
-
-			System.out.println("Enviou ao servidor o status atual do objeto " + equipamento.getTipo() 
-			+ " com valor: " + tv.isLigar());
+			}			
 		}
-
-
-		//		saida.close();
-		//
-		//		teclado.close();
 
 		cliente.close();    
 
 	}
 
 	public static void main(String[] args) throws UnknownHostException, IOException {
-
 		// dispara cliente
 		new ClienteTv("127.0.0.1", 12345).executa();
-
 	}
 
 	public MensagemEquipamento getEquipamento() {
@@ -91,8 +87,5 @@ public class ClienteTv {
 	public void setTv(Tv tv) {
 		this.tv = tv;
 	}
-
-	
-	
 
 }

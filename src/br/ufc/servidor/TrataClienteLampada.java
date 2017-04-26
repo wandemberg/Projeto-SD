@@ -64,7 +64,7 @@ public class TrataClienteLampada implements TrataCliente, Runnable{
 
 	}
 
-	boolean statusLampada = false;
+//	boolean statusLampada = false;
 
 	public void enviarMensagemClienteLampada(Object objEnviar) {
 		// envia msg para todo mundo
@@ -73,11 +73,11 @@ public class TrataClienteLampada implements TrataCliente, Runnable{
 		try {
 			oos2 = new ObjectOutputStream(cliente.getOutputStream());
 
-			statusLampada = !statusLampada;
-			Lampada lamp = new Lampada();
-			lamp.setLigar(statusLampada);
+//			statusLampada = !statusLampada;
+//			Lampada lamp = new Lampada();
+//			lamp.setLigar(objEnviar);
 
-			oos2.writeObject(lamp);
+			oos2.writeObject(objEnviar);
 
 
 		} catch (IOException e1) {

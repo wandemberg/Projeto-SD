@@ -15,7 +15,6 @@ public class RecebedorCortina implements Runnable{
 	private Object objetoAtualizado;
 
 	public RecebedorCortina(InputStream servidor, ClienteCortina cliente) {
-
 		this.servidor = servidor;
 		this.cliente = cliente;
 	}

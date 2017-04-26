@@ -47,20 +47,24 @@ public class RecebedorControlador implements Runnable{
 			//Atualiza o objeto recebido na msg
 			if (msgControlador.getTipoObjeto().equals("Arcondicionado")) {			
 				cliente.getListaDispositivos().replace("Arcondicionado", (Arcondicionado)msgControlador.getObj());
-				
+				System.out.println("Status Arcondicionado recebida do Servidor e atualizada, está ligada: " + ((Arcondicionado)msgControlador.getObj()).isLigar());
+
 			} else if (msgControlador.getTipoObjeto().equals("Lampada")) {
 				cliente.getListaDispositivos().replace("Lampada", (Lampada)msgControlador.getObj());
 				System.out.println("Status Lampada recebida do Servidor e atualizada, está ligada: " + ((Lampada)msgControlador.getObj()).isLigar());
 				
 			} else if (msgControlador.getTipoObjeto().equals("Cortina")) {
 				cliente.getListaDispositivos().replace("Cortina", (Cortina)msgControlador.getObj());
+				System.out.println("Status Cortina recebida do Servidor e atualizada, está ligada: " + ((Cortina)msgControlador.getObj()).isLevantar());
 
 			} else if (msgControlador.getTipoObjeto().equals("Tv")) {
 				cliente.getListaDispositivos().replace("Tv", (Tv)msgControlador.getObj());
+				System.out.println("Status Tv recebida do Servidor e atualizada, está ligada: " + ((Tv)msgControlador.getObj()).isLigar());
 
 			} else if (msgControlador.getTipoObjeto().equals("Radio")) {
 				cliente.getListaDispositivos().replace("Radio", (Radio)msgControlador.getObj());
-
+				System.out.println("Status Radio recebida do Servidor e atualizada, está ligada: " + ((Radio)msgControlador.getObj()).isLigar());
+				
 			} 			
 			
 //			//Dependendo da escolha do objeto controlador
