@@ -5,7 +5,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 import br.ufc.Arcondicionado;
-import br.ufc.Equipamento;
+import br.ufc.MensagemEquipamento;
 
 public class ClienteArcondicionado {
 
@@ -13,7 +13,7 @@ public class ClienteArcondicionado {
 	private int porta;
 
 	private boolean terminar = false;
-	private Equipamento equipamento;
+	private MensagemEquipamento equipamento;
 	private Arcondicionado arcondicionado;
 
 	public ClienteArcondicionado (String host, int porta) {
@@ -36,7 +36,7 @@ public class ClienteArcondicionado {
 
 		//Mandar um objeto com o tipo do objeto
 		ObjectOutputStream oos = new ObjectOutputStream(cliente.getOutputStream());
-		equipamento = new Equipamento();
+		equipamento = new MensagemEquipamento();
 		oos.writeObject(equipamento);
 
 		System.out.println("Enviou o tipo de objeto");
@@ -97,11 +97,11 @@ public class ClienteArcondicionado {
 
 	}
 
-	public Equipamento getEquipamento() {
+	public MensagemEquipamento getEquipamento() {
 		return equipamento;
 	}
 
-	public void setEquipamento(Equipamento equipamento) {
+	public void setEquipamento(MensagemEquipamento equipamento) {
 		this.equipamento = equipamento;
 	}
 

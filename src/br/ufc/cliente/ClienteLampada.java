@@ -4,7 +4,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import br.ufc.Equipamento;
+import br.ufc.MensagemEquipamento;
 import br.ufc.Lampada;
 
 public class ClienteLampada {
@@ -13,9 +13,9 @@ public class ClienteLampada {
 	private int porta;
 
 	private boolean terminar = false;
-	private Equipamento equipamento;
+	private MensagemEquipamento equipamento;
 	private Lampada lampada;
-	private int tempoTransmissaoEstadoSensor = 5500;
+	private int tempoTransmissaoEstadoSensor = 6000;
 
 	public ClienteLampada (String host, int porta) {
 		this.host = host;
@@ -35,7 +35,7 @@ public class ClienteLampada {
 
 		//Mandar um objeto que quer estabelecer a comunicacao, ou seja, o tipo do objeto
 		ObjectOutputStream oos = new ObjectOutputStream(cliente.getOutputStream());
-		equipamento = new Equipamento();
+		equipamento = new MensagemEquipamento();
 		equipamento.setNome("Lampada 1");
 		equipamento.setIndiceTipoSelecionado(1);
 		oos.writeObject(equipamento);
@@ -50,6 +50,8 @@ public class ClienteLampada {
 			//Ficar variando o resultado para o cliente
 			//			lampada.setLigar(!lampada.isLigar());
 
+			//Só faz retransmitir o objeto atual
+			
 			oos2.writeObject(lampada);
 
 			try {
@@ -78,11 +80,11 @@ public class ClienteLampada {
 
 	}
 
-	public Equipamento getEquipamento() {
+	public MensagemEquipamento getEquipamento() {
 		return equipamento;
 	}
 
-	public void setEquipamento(Equipamento equipamento) {
+	public void setEquipamento(MensagemEquipamento equipamento) {
 		this.equipamento = equipamento;
 	}
 

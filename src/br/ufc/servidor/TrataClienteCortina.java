@@ -6,9 +6,9 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import br.ufc.Cortina;
-import br.ufc.Equipamento;
+import br.ufc.MensagemEquipamento;
 
-public class TrataClienteCortina implements Runnable{
+public class TrataClienteCortina implements TrataCliente, Runnable{
 
 	//Stream para receber dados de um cliente
 	private Socket cliente;
@@ -16,10 +16,10 @@ public class TrataClienteCortina implements Runnable{
 	private Servidor servidor;
 	//Objeto que está no cliente atualizado
 	private Object objetoAtualizado;
-	private Equipamento equipamento;
+	private MensagemEquipamento equipamento;
 	private boolean terminar = false;
 
-	public TrataClienteCortina(Socket cliente, Servidor servidor, Equipamento equipamento) {
+	public TrataClienteCortina(Socket cliente, Servidor servidor, MensagemEquipamento equipamento) {
 		this.cliente = cliente;
 		this.servidor = servidor;
 		//		this.objetoAtualizado = tipoObjeto;
@@ -58,6 +58,7 @@ public class TrataClienteCortina implements Runnable{
 	}
 
 	boolean statusCortina = false;
+	
 	public void enviarMensagemClienteCortina(Object objEnviar) {
 
 		// envia msg para todo mundo
@@ -77,6 +78,11 @@ public class TrataClienteCortina implements Runnable{
 			e1.printStackTrace();
 		}
 
+	}
+
+	@Override
+	public void enviarMensagem(Object objEnviar) {
+		enviarMensagemClienteCortina(objEnviar);		
 	}
 
 

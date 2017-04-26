@@ -4,7 +4,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import br.ufc.Equipamento;
+import br.ufc.MensagemEquipamento;
 import br.ufc.Radio;
 
 public class ClienteRadio {
@@ -13,7 +13,7 @@ public class ClienteRadio {
 	private int porta;
 
 	private boolean terminar = false;
-	private Equipamento equipamento;
+	private MensagemEquipamento equipamento;
 	private Radio radio;
 	private int tempoTransmissaoEstadoSensor = 5500;
 
@@ -35,7 +35,7 @@ public class ClienteRadio {
 
 		//Mandar um objeto que quer estabelecer a comunicacao, ou seja, o tipo do objeto
 		ObjectOutputStream oos = new ObjectOutputStream(cliente.getOutputStream());
-		equipamento = new Equipamento();
+		equipamento = new MensagemEquipamento();
 		equipamento.setNome("Radio 1");
 		equipamento.setIndiceTipoSelecionado(4);
 		oos.writeObject(equipamento);
@@ -76,11 +76,11 @@ public class ClienteRadio {
 
 	}
 
-	public Equipamento getEquipamento() {
+	public MensagemEquipamento getEquipamento() {
 		return equipamento;
 	}
 
-	public void setEquipamento(Equipamento equipamento) {
+	public void setEquipamento(MensagemEquipamento equipamento) {
 		this.equipamento = equipamento;
 	}
 

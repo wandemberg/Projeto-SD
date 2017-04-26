@@ -5,10 +5,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-import br.ufc.Equipamento;
+import br.ufc.MensagemEquipamento;
 import br.ufc.Lampada;
+import br.ufc.MensagemControlador;
 
-public class TrataClienteLampada implements Runnable{
+public class TrataClienteLampada implements TrataCliente, Runnable{
 
 	//Stream para receber dados de um cliente
 	private Socket cliente;
@@ -16,10 +17,10 @@ public class TrataClienteLampada implements Runnable{
 	private Servidor servidor;
 	//Objeto que está no cliente atualizado
 	private Object objetoAtualizado;
-	private Equipamento equipamento;
+	private MensagemEquipamento equipamento;
 	private boolean terminar = false;
 
-	public TrataClienteLampada(Socket cliente, Servidor servidor, Equipamento equipamento) {
+	public TrataClienteLampada(Socket cliente, Servidor servidor, MensagemEquipamento equipamento) {
 		this.cliente = cliente;
 		this.servidor = servidor;
 		this.equipamento = equipamento;
@@ -36,8 +37,16 @@ public class TrataClienteLampada implements Runnable{
 				objetoAtualizado =  ois.readObject();
 
 				System.out.println("Informacao recebida do cliente Lampada se a lampada esta ligada:" + ((Lampada)objetoAtualizado).isLigar());			
-				//Tratar esse indice esta preso ao numero do cliente
-				enviarMensagemClienteLampada(objetoAtualizado);
+//				//Tratar esse indice esta preso ao numero do cliente
+//				enviarMensagemClienteLampada(objetoAtualizado);
+				
+				MensagemControlador msgControlador = new MensagemControlador();
+				msgControlador.setEnviar(false);
+				msgControlador.setObj((Lampada)objetoAtualizado);
+				msgControlador.setTipoObjeto("Lampada");
+				//Enviar ao controlador o objeto atual
+				servidor.enviarMensagemControlador(msgControlador );
+				
 			} catch (IOException e) {
 				e.printStackTrace();
 				terminar = true;
@@ -75,4 +84,10 @@ public class TrataClienteLampada implements Runnable{
 			e1.printStackTrace();
 		}
 	}
+
+	@Override
+	public void enviarMensagem(Object objEnviar) {
+		enviarMensagemClienteLampada(objEnviar);		
+	}
+	
 }

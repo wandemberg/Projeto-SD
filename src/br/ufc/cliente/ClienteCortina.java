@@ -5,7 +5,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 import br.ufc.Cortina;
-import br.ufc.Equipamento;
+import br.ufc.MensagemEquipamento;
 
 public class ClienteCortina {
 
@@ -13,7 +13,7 @@ public class ClienteCortina {
 	private int porta;
 
 	private boolean terminar = false;
-	private Equipamento equipamento;
+	private MensagemEquipamento equipamento;
 	private Cortina cortina;
 	private int tempoTransmissaoEstadoSensor = 5500;
 
@@ -35,7 +35,7 @@ public class ClienteCortina {
 
 		//Mandar um objeto que quer estabelecer a comunicacao, ou seja, o tipo do objeto
 		ObjectOutputStream oos = new ObjectOutputStream(cliente.getOutputStream());
-		equipamento = new Equipamento();
+		equipamento = new MensagemEquipamento();
 		equipamento.setNome("Cortina 1");
 		equipamento.setIndiceTipoSelecionado(2);
 		oos.writeObject(equipamento);
@@ -76,11 +76,11 @@ public class ClienteCortina {
 
 	}
 
-	public Equipamento getEquipamento() {
+	public MensagemEquipamento getEquipamento() {
 		return equipamento;
 	}
 
-	public void setEquipamento(Equipamento equipamento) {
+	public void setEquipamento(MensagemEquipamento equipamento) {
 		this.equipamento = equipamento;
 	}
 

@@ -6,9 +6,9 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import br.ufc.Arcondicionado;
-import br.ufc.Equipamento;
+import br.ufc.MensagemEquipamento;
 
-public class TrataClienteArcondicionado implements Runnable{
+public class TrataClienteArcondicionado implements TrataCliente, Runnable{
 
 	//Stream para receber dados de um cliente
 	private Socket cliente;
@@ -16,10 +16,10 @@ public class TrataClienteArcondicionado implements Runnable{
 	private Servidor servidor;
 	//Objeto que está no cliente atualizado
 	private Arcondicionado objetoAtualizado;
-	private Equipamento equipamento;
+	private MensagemEquipamento equipamento;
 	private boolean terminar = false;
 
-	public TrataClienteArcondicionado(Socket cliente, Servidor servidor, Equipamento equipamento) {
+	public TrataClienteArcondicionado(Socket cliente, Servidor servidor, MensagemEquipamento equipamento) {
 		this.cliente = cliente;
 		this.servidor = servidor;
 		//		this.objetoAtualizado = tipoObjeto;
@@ -116,6 +116,12 @@ public class TrataClienteArcondicionado implements Runnable{
 
 	public void setObjetoAtualizado(Arcondicionado objetoAtualizado) {
 		this.objetoAtualizado = objetoAtualizado;
+	}
+
+	@Override
+	public void enviarMensagem(Object objEnviar) {
+		enviarArcondicionado((Arcondicionado)objEnviar);
+		
 	}
 
 

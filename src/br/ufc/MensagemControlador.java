@@ -1,9 +1,13 @@
 package br.ufc;
 
-public class MensagemControlador {
+import java.io.Serializable;
+
+public class MensagemControlador implements Serializable{
+	private static final long serialVersionUID = 1L;
+
 	//Caso contrário que rece
 	private boolean enviar = true;
-	private String tipoObjeto = "Arcondicionado";
+	private String tipoObjeto = "Lampada";
 	private Object obj;
 	
 	public boolean isEnviar() {
