@@ -7,7 +7,7 @@ import java.net.UnknownHostException;
 import br.ufc.MensagemEquipamento;
 import br.ufc.Lampada;
 
-public class ClienteLampada {
+public class ClienteLampada extends Thread{
 
 	private String host;
 	private int porta;
@@ -23,60 +23,74 @@ public class ClienteLampada {
 		lampada = new Lampada();
 	}
 
-	public void executa() throws UnknownHostException, IOException {
+	@Override		
+	public void run(){
 
-		Socket cliente = new Socket(this.host, this.porta);
+		Socket cliente;
+		try {
+			cliente = new Socket(this.host, this.porta);
 
-		System.out.println("O cliente se conectou ao servidor!");
+			System.out.println("O cliente se conectou ao servidor!");
 
-		// thread para receber mensagens do servidor
-		RecebedorLampada r = new RecebedorLampada(cliente.getInputStream(), this);
-		new Thread(r).start();
+			// thread para receber mensagens do servidor
+			RecebedorLampada r = new RecebedorLampada(cliente.getInputStream(), this);
+			new Thread(r).start();
 
-		//Mandar um objeto que quer estabelecer a comunicacao, ou seja, o tipo do objeto
-		ObjectOutputStream oos = new ObjectOutputStream(cliente.getOutputStream());
-		equipamento = new MensagemEquipamento();
-		equipamento.setNome("Lampada 1");
-		equipamento.setIndiceTipoSelecionado(1);
-		oos.writeObject(equipamento);
+			//Mandar um objeto que quer estabelecer a comunicacao, ou seja, o tipo do objeto
+			ObjectOutputStream oos = new ObjectOutputStream(cliente.getOutputStream());
+			equipamento = new MensagemEquipamento();
+			equipamento.setNome("Lampada 1");
+			equipamento.setIndiceTipoSelecionado(1);
+			oos.writeObject(equipamento);
 
-		System.out.println("Enviou o tipo de objeto");
+			System.out.println("Enviou o tipo de objeto");
 
-		while (!terminar) {
+			while (!terminar) {
 
-			//Mandar o status do objeto inteligente atual
-			ObjectOutputStream oos2 = new ObjectOutputStream(cliente.getOutputStream());
+				//Mandar o status do objeto inteligente atual
+				ObjectOutputStream oos2 = new ObjectOutputStream(cliente.getOutputStream());
 
-			//Ficar variando o resultado para o cliente
-			//			lampada.setLigar(!lampada.isLigar());
+				//Ficar variando o resultado para o cliente
+				//			lampada.setLigar(!lampada.isLigar());
 
-			//Só faz retransmitir o objeto atual
-			
-			oos2.writeObject(lampada);
+				//Só faz retransmitir o objeto atual
 
-			try {
-				Thread.sleep(tempoTransmissaoEstadoSensor);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+				oos2.writeObject(lampada);
+
+				try {
+					Thread.sleep(tempoTransmissaoEstadoSensor);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+
+				System.out.println("Enviou ao servidor o status atual do objeto " + equipamento.getTipo() 
+				+ " com valor: " + lampada.isLigar());
 			}
 
-			System.out.println("Enviou ao servidor o status atual do objeto " + equipamento.getTipo() 
-			+ " com valor: " + lampada.isLigar());
+
+			//		saida.close();
+			//
+			//		teclado.close();
+
+			cliente.close();    
+		} catch (UnknownHostException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 
-
-		//		saida.close();
-		//
-		//		teclado.close();
-
-		cliente.close();    
 
 	}
 
 	public static void main(String[] args) throws UnknownHostException, IOException {
 
 		// dispara cliente
-		new ClienteLampada("127.0.0.1", 12345).executa();
+		//		new ClienteLampada("127.0.0.1", 12345).executa();
+
+		//Implementação utilizando Thread
+		new ClienteLampada("127.0.0.1", 12345).start();
 
 	}
 
