@@ -47,12 +47,11 @@ public class Controlador {
 			oos.writeObject(this.equi);
 
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		System.out.println("Enviou o tipo de objeto");
 
 	}

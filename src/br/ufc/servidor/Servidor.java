@@ -90,11 +90,6 @@ public class Servidor {
 					this.clientes.put("Controlador",tc);
 				}										
 
-
-				//				// adiciona saida do cliente à lista
-				//				this.clientes.add(cliente);
-
-
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			}
@@ -105,18 +100,20 @@ public class Servidor {
 	}
 
 	public void enviarMensagemControlador(MensagemControlador msgControlador){
+		
 		if (clientes.get("Controlador") != null)
 			clientes.get("Controlador").enviarMensagem(msgControlador);;
 	}
 
+	public Map<String, TrataCliente> getClientes() {
+		return clientes;
+	}
+	
 	public static void main(String[] args) throws IOException {
 
 		// inicia o servidor
 		new Servidor(12345).executa();
 
 	}
-
-	public Map<String, TrataCliente> getClientes() {
-		return clientes;
-	}
+	
 }

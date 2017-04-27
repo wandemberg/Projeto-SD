@@ -84,6 +84,11 @@ public class TrataClienteControlador implements TrataCliente, Runnable{
 			}
 		}
 
+		//Remover o tratacontrolador do servidor
+		servidor.getClientes().replace("Controlador", null);
+		
+//		clientes.get("Controlador") != null
+		
 		try {
 			cliente.close();
 		} catch (IOException e) {
